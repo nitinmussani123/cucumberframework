@@ -1,0 +1,27 @@
+{
+  "server": "hub-cloud.browserstack.com",
+  "user": "sethumathavansub1",
+  "key": "5XT8vARSCm4oz49uxRG1",
+
+  "capabilities": {
+    "browserstack.debug": true
+  },
+
+  "environments": {
+    "WIN10_Chrome": {
+    "os": "Windows",
+    "os_version": "10",
+    "browser": "Chrome",
+    "browser_version": "65.0",
+    "resolution": "1280x800"
+    },
+    
+    "WIN10_Firefox": {
+    "os": "Windows",
+    "os_version": "10",
+    "browser": "Firefox",
+    "browser_version": "59.0",
+    "resolution": "1280x800"
+    }   
+  } 
+}

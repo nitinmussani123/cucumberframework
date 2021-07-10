@@ -1,0 +1,17 @@
+#HomePage Objects
+AmazonSearchBox: twotabsearchtextbox
+Support: //a[@aria-label = '24/7 Customer Service. Learn More.']
+Support1: //b['Amazon International Shopping']
+YouMayAlsoLike_HandelName: //*[@class='RelatedUsers-users']//span[contains(@class,'user')]
+YouMayAlsoLike_FullName: //*[@class='RelatedUsers-users']//strong
+tweets: (//span[text()='Tweets'])[1]
+followers: //*[@id='profile-hover-container']//*[text()='Followers']/..//span[contains(@class,'Value')]
+following: //*[@id='profile-hover-container']//*[text()='Following']/..//span[contains(@class,'Value')]
+submit: //input[@type='submit']
+twitterRetweets: (//span[text()='Retweet']/../following-sibling::span/span)
+twitterLikes: (//span[text()='Like' and @class='u-hiddenVisually']/../following-sibling::span/span)
+maxTwitterRetweetName: (//span[text()='Retweet']/../following-sibling::span/span[.='retweetMax'])[1]/../../../../../preceding-sibling::div[@class='js-tweet-text-container']/p
+maxTwitterLikeName: (//span[text()='Like' and @class='u-hiddenVisually']/../following-sibling::span/span[.='likeMax'])[1]/../../../../../preceding-sibling::div[@class='js-tweet-text-container']/p
+twitterRetweetsText: (//div[@class='js-tweet-text-container'])[retweet]//a[contains(@href,'hashtag')]//s[.='#']/../b
+twitterHashTags: ((//div[@class='js-tweet-text-container'])[retweet]//a[contains(@href,'hashtag')]//s[.='#']/../b)[hashtagValues]
+fileUpload: //p[contains(text(),'uploaded a file')]
