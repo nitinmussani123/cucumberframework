@@ -14,7 +14,9 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<browser>chrome</browser>
-		<appURL>https://miro.com/signup</appURL>
+		<appURL>https://github.com/</appURL>
+		<getRepoGitHub>a</getRepoGitHub>
+		<getReleases>as</getReleases>
 	</properties>
 
 
@@ -59,7 +61,11 @@
 			<version>6.8.1</version>
 			<type>pom</type>
 		</dependency>
-
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>3.3.0</version>
+		</dependency>
 		<dependency>
 			<groupId>tech.grasshopper</groupId>
 			<artifactId>extentreports-cucumber6-adapter</artifactId>
@@ -87,7 +93,9 @@
 				<configuration>
 					<systemPropertyVariables>
 						<browser>chrome</browser>
-						<signUpPage>https://miro.com/signup</signUpPage>
+						<signUpPage>https://github.com</signUpPage>
+						<getRepoGitHub>https://api.github.com/repos/@owner@/@repo@</getRepoGitHub>
+						<getReleases>https://api.github.com/repos/@owner@/@repo@/tags</getReleases>
 					</systemPropertyVariables>
 					<includes>
 						<include>Runner2.java</include>

@@ -12,9 +12,7 @@ public class st {
 	@SuppressWarnings("deprecation")
 	@Given("User navigates to {string}")
 	public void getTitle(String url) {
-		System.out.println("INSIDE");
 		String t = sp.navigateToPage(System.getProperty(url));
-		Assert.assertTrue(t.contains("Sign"));
 	}
 
 	@When("User enters {string} in {string}")
@@ -22,10 +20,7 @@ public class st {
 		sp.enterText(input, object);
 	}
 	
-	@When("Generate random valid email id and store in {string}")
-	public void user_enters_password_in(String var) throws InterruptedException {
-		sp.generateValidUsernameAndSave(var);
-	}
+	
 	
 	@When("Clicks on {string}")
 	public void clicks_on(String string) throws InterruptedException {
@@ -37,12 +32,6 @@ public class st {
 		String textDisplayed = sp.getText(locator);
 		System.out.println(textDisplayed);
 		System.out.println(text);
-		Assert.assertEquals(text, textDisplayed);
-	}
-	
-	@Then("Verify user is navigate to new page and verify text in {string} is {string}")
-	public void verify_navigation_to_page(String locator,String text) throws InterruptedException {
-		String textDisplayed = sp.navigateToPageAndVerifyText(locator);
 		Assert.assertEquals(text, textDisplayed);
 	}
 	
@@ -58,10 +47,24 @@ public class st {
 		Thread.sleep(Integer.parseInt(sec+"000"));
 	}
 	
-	@Then("Pop up window is displayed")
-	public void pp() throws InterruptedException {
-		
-		sp.popUpHandle();
+	@Then("User enters {string} in {string} and press enter")
+	public void pressEnter(String val,String locator) throws InterruptedException {
+		sp.enterTextAndPressEnter(val, locator);
+	}
+	
+	@When("User save {string} in {string}")
+	public void saveVariable(String value,String var) throws InterruptedException {
+		sp.saveVaraible(var,value);
+	}
+	
+	@When("User hits the GET api {string} by replacing {string} and fetches {string} and stores in data")
+	public void saveVariable(String api,String replaceVar,String fetchVar)  {
+		sp.getAPI(api, replaceVar,fetchVar);;
+	}
+	
+	@Then("User prints the data on the console for the variables {string}")
+	public void printVariables(String var) throws InterruptedException {
+		sp.printVar(var);
 	}
 	
 

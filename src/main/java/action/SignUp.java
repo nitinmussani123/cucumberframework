@@ -7,11 +7,17 @@ import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import util.Base;
+import io.restassured.RestAssured;
+import io.restassured.RestAssured.*;
+import io.restassured.http.ContentType;
+import io.restassured.matcher.RestAssuredMatchers.*;
+import io.restassured.response.Response;
 
 public class SignUp extends Base {
 
@@ -45,6 +51,17 @@ public class SignUp extends Base {
 		}
 		getWebElement(locator).clear();
 		getWebElement(locator).sendKeys(val);
+
+	}
+	
+	public void enterTextAndPressEnter(String val, String locator) throws InterruptedException {
+		if (val.startsWith("$")) {
+			val = val.substring(1);
+			val = my_dict.get(val);
+		}
+		getWebElement(locator).clear();
+		getWebElement(locator).sendKeys(val);
+		getWebElement(locator).sendKeys(Keys.ENTER);
 
 	}
 
@@ -100,5 +117,38 @@ public class SignUp extends Base {
 		ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
 		Set<String> handles = driver.getWindowHandles();
 		driver.switchTo().window(newTab.get(1));
+	}
+
+
+	public void saveVaraible(String var, String value) {
+		my_dict.put(var, value);
+	}
+	
+	public void getAPI(String api, String repVar, String fetchVar) {
+		String apiendpoint = System.getProperty(api);
+		String[] rep = repVar.split(";");
+		String[] fet = fetchVar.split(";");
+		for(int i = 0; i<rep.length;i++)
+		{
+		apiendpoint = apiendpoint.replace("@"+rep[i]+"@", my_dict.get(rep[i]));
+		}
+		Response response = RestAssured.given()
+                .contentType(ContentType.JSON)
+                .when()
+                .get(apiendpoint)
+                .then()
+                .extract().response();
+		for (int i = 0; i < fet.length; i++) {
+			my_dict.put(fet[i], response.jsonPath().getString(fet[i]));
+		}
+	}
+
+	public void printVar(String var) {
+		String[] vars = var.split(";");
+		
+		System.out.println(my_dict.get(vars[0]));
+		System.out.println("Stars: "+my_dict.get(vars[1]));
+		System.out.println("Releases: "+my_dict.get(vars[3]));
+		System.out.println("Last Release: "+my_dict.get(vars[2]));
 	}
 }
